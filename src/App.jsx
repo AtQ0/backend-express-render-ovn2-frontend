@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     // Fetch data from the backend
-    fetch('https://backend-express-render-ovn2-backend.onrender.com/') // Make sure the URL matches your backend's port
+    fetch('http://localhost:3000/') // Make sure the URL matches your backend's port
       .then((response) => response.json())
       .then((data) => {
         setData(data);
