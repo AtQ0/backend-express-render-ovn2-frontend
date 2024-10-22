@@ -1,10 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState(null); // State to store fetched data
+
+  useEffect(() => {
+    // Fetch data from the backend
+    fetch('http://localhost:3000/') // Make sure the URL matches your backend's port
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <>
@@ -28,8 +41,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* Display the fetched data */}
+      {data ? <p>{data.hello}</p> : <p>Loading...</p>}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
